@@ -1,6 +1,7 @@
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style>
+
  input.outz {
 	background: #666677;
 	/*width: 300px;*/
@@ -68,7 +69,7 @@
   }
   function razl(x){
     var razdel='';
-    if (document.getElementById('ee').value>10) var razdel='`';
+//    if (document.getElementById('ee').value>10) var razdel='`';
     var ret='';
     var n=0;
     var de = document.getElementById("de").value;
@@ -80,8 +81,10 @@
       a=x/en(n);
       b=Math.floor(a);
       x = x - b*en(n);
-      if (n==0) {ret=ret+razdel+b+',';} 
-      else {ret=ret+razdel+b;}
+      var alphabeta='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if (b>9) {var b=alphabeta[b-10];}
+      if (n==0) {ret=ret+b+',';} 
+      else {ret=ret+b;}
     }
 //document.getElementById("zout1").value=ret;
 //document.getElementById("zout2").value=x;
