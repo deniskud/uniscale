@@ -50,43 +50,45 @@
 <body>
 <font face="arial">
 <script>
-window.onload = function(){razl(document.getElementById('zin').value);fild=document.getElementById('zin');fild.focus();fild.select();}
-function en(n){ //'ee' v stepeni n
- var ret=1;
- var ee = document.getElementById('ee').value;
- if (ee=='e') {ee=Math.E;document.getElementById('ee').value=ee;}
- if (ee=='pi'){ee=Math.PI;document.getElementById('ee').value=ee;}
- if (n==0) return 1;
- if (n>0) while (n>0) {ret=ret*ee;n--}
- if (n<0) while (n<0) {ret=ret/ee;n++}
- return ret;
-}
-function razl(x){
- var razdel='';
- if (document.getElementById('ee').value>10) var razdel='`';
- var ret='';
- var n=0;
- var de = document.getElementById("de").value;
- while (en(n)<=x) n++;  //nahodim maksimalnuy element
- while (en(n)>de)       //zapuskaem cikl do urovnya pogreshnosti 
- {
-  n--;
-  var a=x/en(n);
-  var b=Math.floor(a);
-  var x = x - b*en(n);
-  if (n==0) {
-   var ret=ret+razdel+b+',';
-   } 
-  else {
-  var ret=ret+razdel+b;
+  window.onload = function(){
+    razl(document.getElementById('zin').value);
+    fild=document.getElementById('zin');
+    fild.focus();
+    fild.select();
   }
- }
+  function en(n){ //'ee' v stepeni n
+    var ret=1;
+    var ee = document.getElementById('ee').value;
+    if (ee=='e') {ee=Math.E;document.getElementById('ee').value=ee;}
+    if (ee=='pi'){ee=Math.PI;document.getElementById('ee').value=ee;}
+    if (n==0) return 1;
+    if (n>0) while (n>0) {ret=ret*ee;n--}
+    if (n<0) while (n<0) {ret=ret/ee;n++}
+    return ret;
+  }
+  function razl(x){
+    var razdel='';
+    if (document.getElementById('ee').value>10) var razdel='`';
+    var ret='';
+    var n=0;
+    var de = document.getElementById("de").value;
+    var a;
+    var b;
+    while (en(n)<=x) n++;  //nahodim maksimalnuy element
+    while (en(n)>de){       //zapuskaem cikl do urovnya pogreshnosti 
+      n--;
+      a=x/en(n);
+      b=Math.floor(a);
+      x = x - b*en(n);
+      if (n==0) {ret=ret+razdel+b+',';} 
+      else {ret=ret+razdel+b;}
+    }
 //document.getElementById("zout1").value=ret;
 //document.getElementById("zout2").value=x;
 //var kolvoznakov=Math.floor(Math.log((1/de))/Math.log(10))+1;
-document.getElementById('outdiv').innerHTML ="<h1>"+ ret + "<font size='2'>"+ document.getElementById('ee').value +"</font></h1><br><font size='6' color='#707070'> + " + x.toFixed(20) +"</font><font size='2'>10 </font><font size='6' color='#0'> (погрешность)</font>" ; 
-return ret;
-}
+    document.getElementById('outdiv').innerHTML ="<h1>"+ ret + "<font size='2'>"+ document.getElementById('ee').value +"</font></h1><br><font size='6' color='#707070'> + " + x.toFixed(20) +"</font><font size='2'>10 </font><font size='6' color='#0'> (погрешность)</font>" ; 
+   return ret;
+  }
 
 
 </script>
