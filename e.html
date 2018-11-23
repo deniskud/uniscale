@@ -68,8 +68,6 @@
     return ret;
   }
   function razl(x){
-    var razdel='';
-//    if (document.getElementById('ee').value>10) var razdel='`';
     var ret='';
     var n=0;
     var de = document.getElementById("de").value;
@@ -77,7 +75,6 @@
     var b;
     while (en(n)<=x) n++;  //nahodim maksimalnuy element
     while (en(n--)>de){       //zapuskaem cikl do urovnya pogreshnosti 
-//      n--;
       a=x/en(n);
       b=Math.floor(a);
       x = x - b*en(n);
