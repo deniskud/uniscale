@@ -1,0 +1,120 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+ input.outz {
+	background: #666677;
+	/*width: 300px;*/
+	height: 30px;
+	padding: 1px;
+	margin-bottom: 1px;
+	font-family: Arial;
+	font-style: normal;
+	font-size: 16px;
+	font-weight: bold;
+	color: #ffffff;
+	line-height: 1.4em;
+	text-shadow: none;
+	border: 2px solid #666666;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+	outline: none;
+	float: left;
+}
+ input.outz2 {
+	background: #a6a6b7;
+	/*width: 300px;*/
+	height: 25px;
+	padding: 5px;
+	margin-bottom: 1px;
+	font-family: Arial;
+	font-style: italic;
+	font-size: 14px;
+	font-weight: normal;
+	color: #efefef;
+	line-height: 1.4em;
+	text-shadow: none;
+	border: 2px solid #a6a6a6;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+	outline: none;
+	float: left;
+}
+</style>
+</head>
+<body>
+<font face="arial">
+<script>
+window.onload = function(){razl(document.getElementById('zin').value);fild=document.getElementById('zin');fild.focus();fild.select();}
+function en(n){ //'ee' v stepeni n
+ var ret=1;
+ var ee = document.getElementById('ee').value;
+ if (ee=='e') {ee=Math.E;document.getElementById('ee').value=ee;}
+ if (ee=='pi'){ee=Math.PI;document.getElementById('ee').value=ee;}
+ if (n==0) return 1;
+ if (n>0) while (n>0) {ret=ret*ee;n--}
+ if (n<0) while (n<0) {ret=ret/ee;n++}
+ return ret;
+}
+function razl(x){
+ var razdel='';
+ if (document.getElementById('ee').value>10) var razdel='`';
+ var ret='';
+ var n=0;
+ var de = document.getElementById("de").value;
+ while (en(n)<=x) n++;  //nahodim maksimalnuy element
+ while (en(n)>de)       //zapuskaem cikl do urovnya pogreshnosti 
+ {
+  n--;
+  var a=x/en(n);
+  var b=Math.floor(a);
+  var x = x - b*en(n);
+  if (n==0) {
+   var ret=ret+razdel+b+',';
+   } 
+  else {
+  var ret=ret+razdel+b;
+  }
+ }
+//document.getElementById("zout1").value=ret;
+//document.getElementById("zout2").value=x;
+//var kolvoznakov=Math.floor(Math.log((1/de))/Math.log(10))+1;
+document.getElementById('outdiv').innerHTML ="<h1>"+ ret + "<font size='2'>"+ document.getElementById('ee').value +"</font></h1><br><font size='6' color='#707070'> + " + x.toFixed(20) +"</font><font size='2'>10 </font><font size='6' color='#0'> (погрешность)</font>" ; 
+return ret;
+}
+
+
+</script>
+<!-- } -->
+<h2>Калькулятор для пересчета десятичного числа в порозрядную интерпритацию в целых числах для системы счисления с основанием n для n>1 в т.ч. дробных </h2>
+<hr>
+<input class='outz2' type="text" size="10" id="ee" value="2" onchange="if (this.value<=1){this.value='2';} else  {razl(document.getElementById('zin').value);}"> Основание системы счисления. Допустимый формат хххх.уууу или "е" или "pi".(>1)<br><hr>
+<input class='outz2' type="text" id="de" value=".000000000001" onchange="razl(document.getElementById('zin').value)"> Допустимый предел погрешности для вычисления дробной части.<br><hr>
+<input class='outz' type="text" id="zin" onchange="razl(this.value)" size="55" value="100.625"> <b>Деcятичное число для преобразования в формате хххх.уууу</b>
+<p></p><hr>
+<div id="outdiv"></div>
+<hr>
+<h2>для перевода в 10-ную систему воспользуйтесь формой ниже:</h2>
+<form name='formname' id='formid' method="post" action='ee.php'>
+кол-во разрядов до запятой<input name='doz' type="text" form='formid'><br>
+кол-во разрядов после запятой<input name='posl' type="text" form='formid'><br>
+и основание системы счисления<input name='osn' type="text" form='formid'><br>
+<input type="submit" form='formid'><br>
+</form>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
